@@ -1,8 +1,29 @@
+:root {
+  --color-yinMn_blue: #2e5077;
+  --color-tropical_indigo: #9792e3;
+  --color-melon: #fab3a9;
+  --color-citron: #dbd053;
+  --color-mint_green: #ddfff7;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-mint_green);
+  font-weight: 600;
+}
+
+a:hover {
+  text-decoration: none;
+  color: var(--color-citron);
+}
+
 html {
   /* set 1rem to 10px instead of native 16px to make it 
   easier to calculate font-size values for the rest of 
   the page (e.g. 1.6rem is 16px, 2.0rem is 20px, etc.) */
   font-size: 62.5%;
+  background-color: var(--color-yinMn_blue);
+  color: var(--color-mint_green);
 }
 
 body {
@@ -14,11 +35,9 @@ body {
   font-size: 1.75rem;
   line-height: 1.5;
   color: ;
-  background-color: ;
 }
 
 header {
-  background-color: aquamarine;
   padding-left: 1rem;
   padding-right: 1rem;
   width: 100vw;
@@ -35,14 +54,92 @@ header nav ul {
 }
 
 main {
+  background-image: linear-gradient(
+    to bottom,
+    var(--color-yinMn_blue),
+    var(--color-tropical_indigo)
+  );
+  padding-top: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   min-height: calc(100vh - 14rem);
   width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 footer {
-  background-color: aquamarine;
+  background-color: var(--color-tropical_indigo);
+  padding-left: 1rem;
+  padding-right: 1rem;
   width: 100vw;
   height: 8rem;
   display: flex;
   justify-content: space-between;
+  align-items: end;
+}
+
+footer div p {
+  font-size: 1.5rem;
+}
+
+.header__logo {
+  color: var(--color-citron);
+}
+
+.navLinkActive {
+  color: var(--color-citron);
+}
+
+.header__auth__login {
+  width: 8rem;
+  height: 4rem;
+  border-radius: 3rem;
+  border: 0.2rem solid var(--color-mint_green);
+  background-color: var(--color-yinMn_blue);
+  color: var(--color-mint_green);
+  cursor: pointer;
+}
+
+.header__auth__login:hover {
+  background-color: var(--color-citron);
+  color: var(--color-yinMn_blue);
+}
+
+.header__search__bar {
+  width: 50rem;
+  height: 4rem;
+  padding-left: 2rem;
+  border-top-left-radius: 3rem;
+  border-bottom-left-radius: 3rem;
+  border: 0.2rem solid var(--color-mint_green);
+  background-color: var(--color-yinMn_blue);
+  color: var(--color-mint_green);
+}
+
+::placeholder {
+  color: var(--color-mint_green);
+}
+
+.search__bar__button {
+  width: 8rem;
+  height: 4rem;
+  border-top-right-radius: 3rem;
+  border-bottom-right-radius: 3rem;
+  border: 0.2rem solid var(--color-mint_green);
+  background-color: var(--color-tropical_indigo);
+  color: var(--color-mint_green);
+  cursor: pointer;
+}
+
+.search__bar__button:hover {
+  background-color: var(--color-citron);
+  color: var(--color-yinMn_blue);
+}
+
+.search__bar__button:active {
+  background-color: var(--color-mint_green);
+  color: var(--color-yinMn_blue);
 }
