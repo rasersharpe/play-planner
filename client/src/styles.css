@@ -6,6 +6,8 @@
   --color-mint_green: #ddfff7;
 }
 
+/* Element Selectors */
+
 a {
   text-decoration: none;
   color: var(--color-mint_green);
@@ -85,6 +87,8 @@ footer div p {
   font-size: 1.5rem;
 }
 
+/* Class Selectors */
+
 .header__logo {
   color: var(--color-citron);
 }
@@ -142,4 +146,12 @@ footer div p {
 .search__bar__button:active {
   background-color: var(--color-mint_green);
   color: var(--color-yinMn_blue);
+}
+
+.errorPage {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
