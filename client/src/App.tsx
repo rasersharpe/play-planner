@@ -9,7 +9,7 @@ function App() {
   return (
     <>
       <Header />
-      <main>
+      <main className="main__container">
         <Outlet />
       </main>
       <Footer />
