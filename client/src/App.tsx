@@ -11,6 +11,7 @@ function App() {
       <Header />
       <main className="main__container">
         <Outlet />
+      
       </main>
       <Footer />
     </>
