@@ -1,12 +1,12 @@
-import React, { use } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const currentPage = useLocation().pathname;
-  const handleSearch = (event: React.FormEvent) => {};
   return (
     <header>
-      <h1 className="header__logo">PLAY PLANNER</h1>
+      <h1 className="header__logo__play">
+        PLAY<span className="header__logo__planner">PLANNER</span>
+      </h1>
       <div className="header__search">
         <input
           className="header__search__bar"
@@ -53,7 +53,9 @@ const Header = () => {
         </ul>
       </nav>
       <div className="header__auth">
-        <button className="header__auth__login">Login</button>
+        <Link to="/login">
+          <button className="header__auth__login">Login</button>
+        </Link>
       </div>
     </header>
   );

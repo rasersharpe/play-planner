@@ -36,7 +36,6 @@ body {
   /* set body font size to 1.75rem, which is 1.75x more than the font-size of 10px, making it 17.5px  */
   font-size: 1.75rem;
   line-height: 1.5;
-  color: ;
 }
 
 header {
@@ -89,8 +88,12 @@ footer div p {
 
 /* Class Selectors */
 
-.header__logo {
+.header__logo__play {
   color: var(--color-citron);
+}
+
+.header__logo__planner {
+  color: var(--color-tropical_indigo);
 }
 
 .navLinkActive {
@@ -109,6 +112,11 @@ footer div p {
 
 .header__auth__login:hover {
   background-color: var(--color-citron);
+  color: var(--color-yinMn_blue);
+}
+
+.header__auth__login:active {
+  background-color: var(--color-mint_green);
   color: var(--color-yinMn_blue);
 }
 
@@ -133,7 +141,8 @@ footer div p {
   border-top-right-radius: 3rem;
   border-bottom-right-radius: 3rem;
   border: 0.2rem solid var(--color-mint_green);
-  background-color: var(--color-tropical_indigo);
+  border-left: none;
+  background-color: var(--color-yinMn_blue);
   color: var(--color-mint_green);
   cursor: pointer;
 }

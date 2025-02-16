@@ -1,6 +1,6 @@
 // Importing React and ReactDOM for rendering the application
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, Route, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 // Importing global styles
 import "./reset.css";
@@ -11,8 +11,9 @@ import App from "./App.tsx";
 import ErrorPage from "./pages/ErrorPage.tsx";
 import Home from "./pages/Home.tsx";
 import WishList from "./pages/WishList.tsx";
-import Login from "./pages/Login.tsx";
 import PlayedGames from "./pages/PlayedGames.tsx";
+import Login from "./pages/Login.tsx";
+import Signup from "./pages/Signup.tsx";
 
 // Defining the routes for the application
 const router = createBrowserRouter([
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/signup",
+        element: <Signup />,
       },
     ],
   },
