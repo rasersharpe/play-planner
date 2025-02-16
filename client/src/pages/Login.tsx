@@ -5,13 +5,18 @@ import Auth from "../utils/auth";
 import { login } from "../api/authAPI";
 import type { UserLogin } from "../interfaces/UserLogin";
 
+// This component handles the login process for the user
 const Login = () => {
+  // This hook gets the current location of the user
   const currentPage = useLocation().pathname;
+
+  // This state variable holds the login data
   const [loginData, setLoginData] = useState<UserLogin>({
     username: "",
     password: "",
   });
 
+  // This function handles the change in the input fields
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -22,6 +27,7 @@ const Login = () => {
     });
   };
 
+  // This function handles the form submission
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
