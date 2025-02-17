@@ -1,4 +1,3 @@
-//
 import { useState, type FormEvent, type ChangeEvent } from "react";
 
 import Auth from "../utils/auth";
@@ -26,7 +25,11 @@ const Signup = () => {
     e.preventDefault();
     try {
       const data = await signup(signupData);
-      Auth.login(data.token);
+      if (data && data.token) {
+        Auth.login(data.token);
+      } else {
+        throw new Error("Invalid signup response");
+      }
     } catch (error) {
       console.error("Signup failed", error);
     }
