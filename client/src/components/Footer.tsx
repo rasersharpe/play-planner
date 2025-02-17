@@ -1,9 +1,21 @@
-import React from "react";
-
 const Footer = () => {
   return (
     <footer>
-      <div>Footer</div>
+      <div>
+        <p>
+          Created using{" "}
+          <a
+            href="https://rawg.io/apidocs"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            [RAWG API]
+          </a>{" "}
+        </p>
+      </div>
+      <div>
+        <p>&copy; 2025 Blake Anderson, Jay Bhatt, Jake Ringate, Kira Ziegler</p>
+      </div>
     </footer>
   );
 };

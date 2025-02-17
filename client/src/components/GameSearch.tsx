@@ -1,63 +1,59 @@
-import dotenv from 'dotenv';
 import React, { useState } from 'react';
-import { GameInterface } from '../Interface/GameInterface';
+import { GameInterface } from "../interfaces/GameInterface";
 
-dotenv.config();
-export const API_KEY = process.env.REACT_APP_API_KEY;
+const apiKey = import.meta.env.VITE_API_KEY;
 
-
-
-// React.FC functional component to search for games
-const GameComponent: React.FC = () => {
-  // useStaate hook to store game data (title, image, description)
-  const [games, setGames] = useState<GameInterface[]>([]);
+const GameSearch: React.FC = () => {
+  const [game, setGame] = useState<GameInterface | null>(null);
   const [gameTitle, setGameTitle] = useState<string>('');
-// function to fetch game data from the API
-  const fetchGame = async () => {
-    try {
-      const response = await fetch(`https://api.rawg.io/api/games?search=${gameTitle}&key=${API_KEY}`);
-    const data = await response.json();
-    if (data.results)  {
-      const gameData = data.results[0];
-      setGames([{
-        id: gameData.id,
-        title: gameData.name,
-        image: gameData.background_image,
-        description: gameData.description_raw,
-      }]);
-    } else {
-      setGames([]);
-    }
-    } catch (error) {
-      console.error("Error fetching games:", error);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const handleSearch = () => {
+    if (gameTitle) {
+      fetchGame(gameTitle);
     }
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    fetchGame();
+  const fetchGame = async (title: string) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`https://api.rawg.io/api/games?search=${title}&key=${apiKey}`);
+      const data = await response.json();
+      if (data.results && data.results.length > 0) {
+        setGame(data.results[0]);
+      } else {
+        setGame(null);
+      }
+    } catch (error) {
+      console.error('Error fetching game:', error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-      <input 
-        type='text'
+      <input
+        type="text"
         value={gameTitle}
         onChange={(e) => setGameTitle(e.target.value)}
-        placeholder='search for a game'
-        />
-        <button type='submit'>Search</button>
-      </form>
-      <div>
-          {games.map((game) => (
-            <div key={game.id}>
-              <h1>{game.title}</h1>
-              <img src={game.image} alt={game.title} />
-              <p>{game.description}</p>
-            </div>
-          ))}
+        placeholder="Enter game title"
+      />
+      <button onClick={handleSearch}>Search</button>
+
+      {loading && <div>Loading...</div>}
+
+      {game && (
+        <div>
+          <h1>{game.name}</h1>
+          <img src={game.background_image} alt={game.name} />
+          <p>{game.description_raw}</p>
         </div>
-    </div>);
+      )}
+
+      {!loading && !game && <div>No game found</div>}
+    </div>
+  );
 };
-export default GameComponent;
+
+export default GameSearch;
