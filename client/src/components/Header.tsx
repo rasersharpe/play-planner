@@ -62,7 +62,9 @@ const Header = () => {
         {isLoggedIn ? (
           <div>
             <span>Welcome, {user?.username}</span> {/* Display the username */}
-            <button onClick={handleLogout}>Logout</button>
+            <button className="header__auth__logout" onClick={handleLogout}>
+              Logout
+            </button>
           </div>
         ) : (
           <Link to="/login">

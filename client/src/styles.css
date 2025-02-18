@@ -120,6 +120,25 @@ footer div p {
   color: var(--color-yinMn_blue);
 }
 
+.header__auth__logout {
+  width: 8rem;
+  height: 4rem;
+  border-radius: 3rem;
+  border: 0.2rem solid var(--color-mint_green);
+  background-color: var(--color-yinMn_blue);
+  color: var(--color-mint_green);
+  cursor: pointer;
+}
+.header__auth__logout:hover {
+  background-color: var(--color-citron);
+  color: var(--color-yinMn_blue);
+}
+
+.header__auth__logout:active {
+  background-color: var(--color-mint_green);
+  color: var(--color-yinMn_blue);
+}
+
 .header__search__bar {
   width: 50rem;
   height: 4rem;
