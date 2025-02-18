@@ -1,7 +1,18 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import AuthService from "../utils/auth";
 
 const Header = () => {
+
+
   const currentPage = useLocation().pathname;
+  const navigate = useNavigate();
+  const isLoggedIn = AuthService.loggedIn();
+  const user = isLoggedIn ? AuthService.getProfile() : null;
+
+  const handleLogout = () => {
+    AuthService.logout();
+    navigate("/login");
+  };
   return (
     <header>
       <h1 className="header__logo__play">
@@ -53,9 +64,16 @@ const Header = () => {
         </ul>
       </nav>
       <div className="header__auth">
-        <Link to="/login">
-          <button className="header__auth__login">Login</button>
-        </Link>
+        {isLoggedIn ? (
+          <div>
+            <span>Welcome, {user?.username}</span> {/* Display the username */}
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        ) : (
+          <Link to="/login">
+            <button className="header__auth__login">Login</button>
+          </Link>
+        )}
       </div>
     </header>
   );
