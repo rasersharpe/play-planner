@@ -1,60 +1,43 @@
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { GameInterface } from "../interfaces/GameInterface";
+import AuthService from "../utils/auth";
 
-interface PlayedGame {
-  id: number;
-  name: string;
-  background_image: string;
-  description: string;
-}
+const PlayedGames = () => {
+  const [games, setGames] = useState<GameInterface[]>([]);
+  const userId = AuthService.loggedIn() ? AuthService.getProfile()?.id : null;
 
-const PlayedGames: React.FC = () => {
-  const [playedGames, setPlayedGames] = useState<PlayedGame[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
-
-  // Fetch played games from backend
   useEffect(() => {
+    // Fetch the played games from the API
     const fetchPlayedGames = async () => {
-      try {
-        const response = await fetch('/api/played');
-        if (!response.ok) {
-          throw new Error('Failed to fetch played games');
+      if (userId) {
+        const response = await fetch(`/api/users/${userId}/played`);
+        if (response.ok) {
+          const data = await response.json();
+          setGames(data);
+        } else {
+          console.error("Error fetching played games");
         }
-        const data = await response.json();
-        setPlayedGames(data);
-      } catch (err) {
-        setError('Error loading played games.');
-      } finally {
-        setLoading(false);
       }
     };
 
     fetchPlayedGames();
-  }, []);
-
-  if (loading) {
-    return <div>Loading played games...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
+  }, [userId]);
 
   return (
-    <div>
-      <h1>My Played Games</h1>
-      {playedGames.length > 0 ? (
-        <div className="played-games-list">
-          {playedGames.map((game) => (
-            <div key={game.id} className="played-game-item">
+    <div className="games-list">
+      <h1>Played Games</h1>
+      {games.length === 0 ? (
+        <p>You have not marked any games as played yet.</p>
+      ) : (
+        <ul>
+          {games.map((game) => (
+            <li key={game.id} className="game-item">
               <h2>{game.name}</h2>
               <img src={game.background_image} alt={game.name} />
-              <p>{game.description}</p>
-            </div>
+              <p>{game.description_raw}</p>
+            </li>
           ))}
-        </div>
-      ) : (
-        <div>No played games found</div>
+        </ul>
       )}
     </div>
   );

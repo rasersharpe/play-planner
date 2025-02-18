@@ -28,6 +28,7 @@ PlayedGame.init(
   {
     sequelize,
     modelName: 'PlayedGame',
+    tableName: 'played_game',
   }
 );
 
