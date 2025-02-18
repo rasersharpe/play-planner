@@ -1,4 +1,3 @@
-import React from "react";
 import GameSearch from "../components/GameSearch";
 const Home = () => {
   return (
