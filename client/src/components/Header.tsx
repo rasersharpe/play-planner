@@ -2,8 +2,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import AuthService from "../utils/auth";
 
 const Header = () => {
-
-
   const currentPage = useLocation().pathname;
   const navigate = useNavigate();
   const isLoggedIn = AuthService.loggedIn();
@@ -58,9 +56,6 @@ const Header = () => {
               Played Games
             </Link>
           </li>
-          {/* <li>
-            <Link to="/login" className={currentPage === "/login ? "navLinkActive" : "navLink"}>Login</Link>
-          </li> */}
         </ul>
       </nav>
       <div className="header__auth">
