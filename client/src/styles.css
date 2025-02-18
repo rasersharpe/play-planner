@@ -243,7 +243,97 @@ footer div p {
   background-color: var(--color-citron);
   color: var(--color-yinMn_blue);
 }
+
 .form__submit__button:active {
   background-color: var(--color-mint_green);
   color: var(--color-yinMn_blue);
+}
+
+.search__section {
+  width: 100vw;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.search__game__container {
+  width: 60rem;
+  height: 60rem;
+  background-color: #00000025;
+  border: 0.2rem solid var(--color-mint_green);
+  border-radius: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.game__image {
+  width: 60rem;
+  height: auto;
+  border-top-left-radius: 3rem;
+  border-top-right-radius: 3rem;
+}
+
+.figure__button__container {
+  width: 60rem;
+  height: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-bottom: 2rem;
+}
+
+.button__add__wishList {
+  width: 20rem;
+  height: 4rem;
+  border-radius: 3rem;
+  border: 0.2rem solid var(--color-mint_green);
+  background-color: #00000025;
+  color: var(--color-mint_green);
+  cursor: pointer;
+}
+
+.button__add__wishList:hover {
+  background-color: var(--color-citron);
+  color: var(--color-yinMn_blue);
+}
+.button__add__wishList:active {
+  background-color: var(--color-mint_green);
+  color: var(--color-yinMn_blue);
+}
+.button__add__wishList:disabled {
+  background-color: var(--color-melon);
+  color: var(--color-yinMn_blue);
+  cursor: not-allowed;
+}
+
+.button__add__playedList {
+  width: 20rem;
+  height: 4rem;
+  border-radius: 3rem;
+  border: 0.2rem solid var(--color-mint_green);
+  background-color: #00000025;
+  color: var(--color-mint_green);
+  cursor: pointer;
+}
+
+.button__add__playedList:hover {
+  background-color: var(--color-citron);
+  color: var(--color-yinMn_blue);
+}
+
+.button__add__playedList:active {
+  background-color: var(--color-mint_green);
+  color: var(--color-yinMn_blue);
+}
+
+.button__add__playedList:disabled {
+  background-color: var(--color-melon);
+  color: var(--color-yinMn_blue);
+  cursor: not-allowed;
 }

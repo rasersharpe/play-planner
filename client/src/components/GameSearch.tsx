@@ -110,32 +110,57 @@ const GameSearch: React.FC = () => {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        value={gameTitle}
-        onChange={(e) => setGameTitle(e.target.value)}
-        placeholder="Search for a game..."
-        className="header__search__bar"
-      />
-      <button className="search__bar__button" onClick={handleSearch}>
-        Search
-      </button>
+    <section className="search__section">
+      <div>
+        <input
+          type="text"
+          value={gameTitle}
+          onChange={(e) => setGameTitle(e.target.value)}
+          placeholder="Search for a game..."
+          className="header__search__bar"
+        />
+        <button className="search__bar__button" onClick={handleSearch}>
+          Search
+        </button>
+      </div>
+      <br />
+      <div>
+        {loading && <div>Loading...</div>}
+        {game && (
+          <figure className="search__game__container">
+            <div>
+              <img
+                className="game__image"
+                src={game.background_image}
+                alt={game.name}
+              />
+            </div>
+            <div>
+              <h2>{game.name}</h2>
+            </div>
+            <div>
+              <p>{game.description_raw}</p>
+            </div>
+            <div className="figure__button__container">
+              <button
+                className="button__add__wishList"
+                onClick={handleAddToWishList}
+              >
+                Add to Wish List
+              </button>
+              <button
+                className="button__add__playedList"
+                onClick={handleAddToPlayed}
+              >
+                Add to Played
+              </button>
+            </div>
+          </figure>
+        )}
 
-      {loading && <div>Loading...</div>}
-
-      {game && (
-        <div>
-          <h1>{game.name}</h1>
-          <button onClick={handleAddToPlayed}>Add to Played</button>
-          <button onClick={handleAddToWishList}>Add to Wish List</button>
-          <img src={game.background_image} alt={game.name} />
-          <p>{game.description_raw}</p>
-        </div>
-      )}
-
-      {!loading && !game && <div>No game found</div>}
-    </div>
+        {!loading && !game && <div>No game found</div>}
+      </div>
+    </section>
   );
 };
 
