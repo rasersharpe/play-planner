@@ -43,9 +43,7 @@ const Login = () => {
   return (
     <div className="form__container">
       <form className="login__form" onSubmit={handleSubmit}>
-        <h1 className="h1__log__text">
-          LOG<span className="h1__in__text">IN</span>
-        </h1>
+        <h2>LOGIN</h2>
         <div className="form-group">
           <input
             className="form__input"

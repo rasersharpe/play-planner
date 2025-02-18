@@ -11,6 +11,7 @@ const Signup = () => {
     email: "",
   });
 
+  // This function handles the change in the input fields
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -21,6 +22,7 @@ const Signup = () => {
     });
   };
 
+  // This function handles the form submission
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
@@ -36,44 +38,45 @@ const Signup = () => {
   };
 
   return (
-    <div className="form-container">
-      <form className="form signup-form" onSubmit={handleSubmit}>
-        <h1 className="h1__log__text">
-          SIGN<span className="h1__up__text">UP</span>
-        </h1>
+    <div className="form__container">
+      <form className="signup__form" onSubmit={handleSubmit}>
+        <h2>SIGNUP</h2>
         <div className="form-group">
-          <label>Username</label>
           <input
-            className="form-input"
+            className="form__input"
             type="text"
             name="username"
+            placeholder="username"
             value={signupData.username || ""}
             onChange={handleChange}
           />
         </div>
+        <br />
         <div className="form-group">
-          <label>Email</label>
           <input
-            className="form-input"
+            className="form__input"
             type="email"
             name="email"
+            placeholder="email@email.com"
             value={signupData.email || ""}
             onChange={handleChange}
           />
         </div>
+        <br />
         <div className="form-group">
-          <label>Password</label>
           <input
-            className="form-input"
+            className="form__input"
             type="password"
             name="password"
+            placeholder="password"
             value={signupData.password || ""}
             onChange={handleChange}
           />
         </div>
+        <br />
         <div className="form-group">
-          <button className="btn btn-primary" type="submit">
-            Sign Up
+          <button className="form__submit__button" type="submit">
+            SignUp
           </button>
         </div>
       </form>
