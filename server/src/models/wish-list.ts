@@ -28,6 +28,7 @@ WishList.init(
   {
     sequelize,
     modelName: 'WishList',
+    tableName: 'wish_list',
   }
 );
 

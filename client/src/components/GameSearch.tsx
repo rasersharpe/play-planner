@@ -38,44 +38,74 @@ const GameSearch: React.FC = () => {
   };
 
   const handleAddToPlayed = async () => {
-    if (game) {
-      const response = await fetch(`/api/users/${userId}/played`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          gameId: game.id,
-          name: game.name,
-          background_image: game.background_image,
-          description: game.description_raw,
-        }),
-      });
-      if (response.ok) {
-        window.location.href = '/played'; // Redirect to the Played Games page after success
+    if (game && userId) {
+      try {
+        // Get the JWT token from localStorage
+        const token = localStorage.getItem("id_token");
+        
+        if (!token) {
+          throw new Error("User not authenticated");
+        }
+  
+        const response = await fetch(`/api/users/${userId}/played`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`, 
+          },
+          body: JSON.stringify({
+            gameId: game.id,
+            name: game.name,
+            background_image: game.background_image,
+            description: game.description_raw,
+          }),
+        });
+  
+        if (response.ok) {
+          window.location.href = "/played";
+        } else {
+          console.error("Failed to add game to plaed games", response.status);
+        }
+      } catch (error) {
+        console.error("Error adding game to played games:", error);
       }
     }
   };
 
   const handleAddToWishList = async () => {
-    if (game) {
-      const response = await fetch(`/api/users/${userId}/wishlist`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          gameId: game.id,
-          name: game.name,
-          background_image: game.background_image,
-          description: game.description_raw,
-        }),
-      });
-      if (response.ok) {
-        window.location.href = '/wishlist'; // Redirect to the Wish List page after success
+      if (game && userId) {
+        try {
+          // Get the JWT token from localStorage
+          const token = localStorage.getItem("id_token");
+          
+          if (!token) {
+            throw new Error("User not authenticated");
+          }
+    
+          const response = await fetch(`/api/users/${userId}/wishlist`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${token}`, // Add token here
+            },
+            body: JSON.stringify({
+              gameId: game.id,
+              name: game.name,
+              background_image: game.background_image,
+              description: game.description_raw,
+            }),
+          });
+    
+          if (response.ok) {
+            window.location.href = "/wishlist"; // Redirect to the Wishlist page after success
+          } else {
+            console.error("Failed to add game to wishlist", response.status);
+          }
+        } catch (error) {
+          console.error("Error adding game to wishlist:", error);
+        }
       }
-    }
-  };
+    };
 
   return (
     <div>
@@ -92,10 +122,10 @@ const GameSearch: React.FC = () => {
       {game && (
         <div>
           <h1>{game.name}</h1>
-          <img src={game.background_image} alt={game.name} />
-          <p>{game.description_raw}</p>
           <button onClick={handleAddToPlayed}>Add to Played</button>
           <button onClick={handleAddToWishList}>Add to Wish List</button>
+          <img src={game.background_image} alt={game.name} />
+          <p>{game.description_raw}</p>
         </div>
       )}
 

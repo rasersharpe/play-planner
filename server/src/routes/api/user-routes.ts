@@ -38,6 +38,7 @@ router.post('/:id/wishlist', async (req: Request, res: Response): Promise<void> 
   const { gameId, name, background_image, description } = req.body;
 
   try {
+    console.log("Authenticated User:", req.user);
     const user = await User.findByPk(id);
     if (!user) {
       res.status(404).json({ message: 'User not found' });
