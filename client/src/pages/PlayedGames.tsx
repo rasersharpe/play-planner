@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-// Define the structure of a PlayedGame (you can adjust the interface as per your needs)
 interface PlayedGame {
   id: number;
   name: string;
@@ -17,7 +16,7 @@ const PlayedGames: React.FC = () => {
   useEffect(() => {
     const fetchPlayedGames = async () => {
       try {
-        const response = await fetch('/api/played'); // Replace with the correct API endpoint
+        const response = await fetch('/api/played');
         if (!response.ok) {
           throw new Error('Failed to fetch played games');
         }
@@ -33,7 +32,6 @@ const PlayedGames: React.FC = () => {
     fetchPlayedGames();
   }, []);
 
-  // Handle loading and error states
   if (loading) {
     return <div>Loading played games...</div>;
   }
