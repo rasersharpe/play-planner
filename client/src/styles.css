@@ -88,6 +88,12 @@ footer div p {
 
 /* Class Selectors */
 
+.logo__nav__container {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
 .header__logo__play {
   color: var(--color-citron);
 }
@@ -146,7 +152,7 @@ footer div p {
   border-top-left-radius: 3rem;
   border-bottom-left-radius: 3rem;
   border: 0.2rem solid var(--color-mint_green);
-  background-color: var(--color-yinMn_blue);
+  background-color: #00000025;
   color: var(--color-mint_green);
 }
 
@@ -161,7 +167,7 @@ footer div p {
   border-bottom-right-radius: 3rem;
   border: 0.2rem solid var(--color-mint_green);
   border-left: none;
-  background-color: var(--color-yinMn_blue);
+  background-color: #00000025;
   color: var(--color-mint_green);
   cursor: pointer;
 }
