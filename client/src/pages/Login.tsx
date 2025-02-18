@@ -41,48 +41,52 @@ const Login = () => {
   };
 
   return (
-        <div className="form-container">
-        <form className="form login-form" onSubmit={handleSubmit}>
-          <h1 className="h1__log__text">
-            LOG<span className="h1__in__text">IN</span>
-          </h1>
-          <div className="form-group">
-            <label>Username</label>
-            <input
-              className="form-input"
-              type="text"
-              name="username"
-              value={loginData.username || ""}
-              onChange={handleChange} />
-          </div>
-          <div className="form-group">
-            <label>Password</label>
-            <input
-              className="form-input"
-              type="password"
-              name="password"
-              value={loginData.password || ""}
-              onChange={handleChange} />
-          </div>
-          <div className="form-group">
-            <button className="btn btn-primary" type="submit">
-              Login
-            </button>
-          </div>
-          {loginError && <p className="error-message">{loginError}</p>}
-        </form>
-        <div className="form-footer">
-          <p>
-            Don't have an account?{" "}
-            <Link
-              to="/signup"
-              className={currentPage === "/signup" ? "navLinkActive" : "navLink"}
-            >
-              Sign up here.
-            </Link>
-          </p>
+    <div className="form__container">
+      <form className="login__form" onSubmit={handleSubmit}>
+        <h1 className="h1__log__text">
+          LOG<span className="h1__in__text">IN</span>
+        </h1>
+        <div className="form-group">
+          <input
+            className="form__input"
+            type="text"
+            name="username"
+            placeholder="username"
+            value={loginData.username || ""}
+            onChange={handleChange}
+          />
         </div>
+        <br />
+        <div className="form-group">
+          <input
+            className="form__input"
+            type="password"
+            name="password"
+            placeholder="password"
+            value={loginData.password || ""}
+            onChange={handleChange}
+          />
+        </div>
+        <br />
+        <div className="form-group">
+          <button className="form__submit__button" type="submit">
+            Login
+          </button>
+        </div>
+        {loginError && <p className="error-message">{loginError}</p>}
+      </form>
+      <div className="form-footer">
+        <p>
+          Don't have an account?{" "}
+          <Link
+            to="/signup"
+            className={currentPage === "/signup" ? "navLinkActive" : "navLink"}
+          >
+            Sign up here.
+          </Link>
+        </p>
       </div>
+    </div>
   );
 };
 

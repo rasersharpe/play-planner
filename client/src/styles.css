@@ -165,3 +165,51 @@ footer div p {
   align-items: center;
 }
 
+.form__container {
+  width: 50rem;
+  height: 40rem;
+  background-color: var(--color-tropical_indigo);
+  border-radius: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__form {
+  width: 40rem;
+  height: 30rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form__input {
+  width: 30rem;
+  height: 4rem;
+  padding-left: 2rem;
+  border-radius: 3rem;
+  border: 0.2rem solid var(--color-mint_green);
+  background-color: #00000025;
+  color: var(--color-mint_green);
+}
+
+.form__submit__button {
+  width: 8rem;
+  height: 4rem;
+  border-radius: 3rem;
+  border: 0.2rem solid var(--color-mint_green);
+  background-color: #00000025;
+  color: var(--color-mint_green);
+  cursor: pointer;
+}
+
+.form__submit__button:hover {
+  background-color: var(--color-citron);
+  color: var(--color-yinMn_blue);
+}
+.form__submit__button:active {
+  background-color: var(--color-mint_green);
+  color: var(--color-yinMn_blue);
+}
