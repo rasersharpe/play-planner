@@ -5,13 +5,13 @@ import AuthService from "../utils/auth";
 const PlayedGames = () => {
   const [games, setGames] = useState<GameInterface[]>([]);
   const userId = AuthService.loggedIn() ? AuthService.getProfile()?.id : null;
+  console.log("User Profile:", AuthService.loggedIn());
+  console.log("User ID:", userId);
   
   if (!userId) {
     return <p>Please log in to see your played games.</p>;
   }
 
-  console.log("User Profile:", AuthService.loggedIn());
-  console.log("User ID:", userId);
 
   useEffect(() => {
     // Fetch the played games from the API
