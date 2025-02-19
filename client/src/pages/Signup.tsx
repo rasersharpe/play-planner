@@ -1,6 +1,6 @@
 import { useState, type FormEvent, type ChangeEvent } from "react";
 import type { UserSignup } from "../interfaces/UserSignup";
-
+import { useNavigate } from 'react-router-dom';
 const Signup = () => {
   const [signupData, setSignupData] = useState<UserSignup>({
     username: "",
@@ -8,6 +8,7 @@ const Signup = () => {
     email: "",
   });
 
+  const navigate = useNavigate();
   // This function handles the change in the input fields
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -26,11 +27,11 @@ const Signup = () => {
     const userData = {
       username: signupData.username,
       email: signupData.email,
-      password: signupData.password,
+      password: signupData.password, 
     };
   
     try {
-      const response = await fetch('http://localhost:3000/auth/signup', {
+      const response = await fetch('/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -40,19 +41,47 @@ const Signup = () => {
   
       // Log the raw response to check its content
       const responseBody = await response.json();
-      console.log("Response Body:", responseBody);  // This is important for debugging
+     // console.log("Response Body:", responseBody);
   
       // Check if the response is successful
       if (!response.ok) {
-        // Log error data if the response is not ok
         console.log("Error response:", responseBody);
         throw new Error(responseBody.message || 'Error during signup');
       }
   
       // If response is OK, process the data
-      console.log('Signup successful', responseBody);
-  
-      // Handle successful signup (e.g., redirect or show message)
+      //console.log('Signup successful', responseBody);
+
+      const loginResponse = await fetch('/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          username: signupData.username,
+          password: signupData.password,
+        }),
+      });
+
+      const loginResponseBody = await loginResponse.json();
+
+      // Check if login was successful
+      if (!loginResponse.ok) {
+        throw new Error(loginResponseBody.message || 'Error during login');
+      }
+
+      console.log('Login successful', loginResponseBody);
+
+      localStorage.setItem('token', loginResponseBody.token);
+
+      const { user } = responseBody;
+      localStorage.setItem('user', JSON.stringify(user)); // Optionally store user data
+      navigate('/');
+
+      // Show success message to the user
+      alert('Signup successful!'); // Alert or component for user feedback
+
+
     } catch (error) {
       console.error('Signup failed', error);
       if (error instanceof Error) {
