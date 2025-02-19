@@ -6,6 +6,7 @@
 
 export interface GameInterface {
     id: number;
+    gameId: number;
     name: string;
     background_image: string;
     description_raw: string;

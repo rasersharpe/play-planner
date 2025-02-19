@@ -92,7 +92,7 @@ router.get('/:id/wishlist', async (req: Request, res: Response): Promise<void> =
     const wishList = await WishList.findAll({
       where: { userId: id },
     });
-
+    console.log("Wish List:", wishList);
     res.json(wishList);
   } catch (error) {
     res.status(500).json({ message: (error as Error).message });
