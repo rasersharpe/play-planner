@@ -21,7 +21,7 @@ WishList.init(
     background_image: {
       type: DataTypes.STRING,
     },
-    description: {
+    description_raw: {
       type: DataTypes.STRING,
     },
   },
@@ -29,6 +29,12 @@ WishList.init(
     sequelize,
     modelName: 'WishList',
     tableName: 'wish_list',
+    indexes: [
+      {
+        unique: true,
+        fields: ['userId', 'gameId'],  // Ensure that the user can't add the same game multiple times
+      },
+    ],
   }
 );
 

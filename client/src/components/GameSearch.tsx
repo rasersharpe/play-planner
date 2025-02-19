@@ -6,7 +6,7 @@ const GameSearch: React.FC = () => {
   const [game, setGame] = useState<GameInterface | null>(null);
   const [gameTitle, setGameTitle] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [userId] = useState<number>(1); // Assuming user ID is known (can be set from the authenticated session)
+  const [userId] = useState<number>(1);
 
   const handleSearch = () => {
     if (gameTitle) {
@@ -25,6 +25,7 @@ const GameSearch: React.FC = () => {
         const firstGame = data.results[0];
         setGame({
           id: firstGame.id,
+          gameId: firstGame.id,
           name: firstGame.name,
           background_image: firstGame.background_image,
           description_raw: firstGame.description_raw,

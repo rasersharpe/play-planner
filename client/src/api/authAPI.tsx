@@ -21,6 +21,7 @@ const login = async (userInfo: UserLogin) => {
     return {
       token: data.token,
       userId: data.userId,
+      username: data.username,
     };
   } catch (error) {
     console.log("User information not retrieved, check network tab!", error);
