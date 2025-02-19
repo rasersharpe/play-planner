@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { GameInterface } from "../interfaces/GameInterface";
+import AuthService from "../utils/auth";
 const apiKey = import.meta.env.VITE_API_KEY;
 
 const GameSearch: React.FC = () => {
@@ -44,8 +45,8 @@ const GameSearch: React.FC = () => {
     if (game && userId) {
       try {
         // Get the JWT token from localStorage
-        const token = localStorage.getItem("id_token");
-
+        const token = AuthService.getToken();
+        console.log("Token:", token);
         if (!token) {
           throw new Error("User not authenticated");
         }
@@ -79,7 +80,7 @@ const GameSearch: React.FC = () => {
     if (game && userId) {
       try {
         // Get the JWT token from localStorage
-        const token = localStorage.getItem("id_token");
+        const token = AuthService.getToken();
 
         if (!token) {
           throw new Error("User not authenticated");
