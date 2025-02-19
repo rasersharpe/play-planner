@@ -23,6 +23,8 @@ WishList.init(
     },
     description: {
       type: DataTypes.STRING,
+      allowNull: true,
+      
     },
   },
   {

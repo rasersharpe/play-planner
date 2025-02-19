@@ -45,7 +45,7 @@ const WishList = () => {
             <li key={game.id} className="game-item">
               <h2>{game.name}</h2>
               <img src={game.background_image} alt={game.name} />
-              <p>{game.description_raw}</p>
+              <p>{game.description}</p>
             </li>
           ))}
         </ul>
