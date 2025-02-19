@@ -13,7 +13,7 @@ router.post('/:id/played', async (req: Request, res: Response): Promise<void> =>
     return;
   }
   const { id } = req.params;
-  const { gameId, name, background_image, description_raw } = req.body;
+  const { gameId, name, background_image, description } = req.body;
 
   try {
     if (req.user.id !== Number(id)) {
@@ -41,7 +41,7 @@ router.post('/:id/played', async (req: Request, res: Response): Promise<void> =>
       gameId,
       name,
       background_image,
-      description_raw,
+      description,
     });
 
     res.status(201).json(playedGame);
@@ -90,7 +90,13 @@ router.post('/:id/wishlist', async (req: Request, res: Response): Promise<void> 
 
 // GET /users/:id/played - Get all played games for a user
 router.get('/:id/played', async (req: Request, res: Response): Promise<void> => {
+  console.log("User ID:", req.params.id, req.user);
   const { id } = req.params;
+    // Ensure the user is logged in and check their userId
+    if (!req.user || req.user.id !== Number(id)) {
+      res.status(401).json({ message: 'Please login to view your wishlist' });
+      return;
+    }
   try {
     const user = await User.findByPk(id);
     if (!user) {
