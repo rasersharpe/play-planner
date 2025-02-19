@@ -23,6 +23,7 @@ PlayedGame.init(
     },
     description: {
       type: DataTypes.STRING,
+      allowNull: true,
     },
   },
   {
