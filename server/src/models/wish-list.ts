@@ -21,7 +21,7 @@ WishList.init(
     background_image: {
       type: DataTypes.STRING,
     },
-    description_raw: {
+    description: {
       type: DataTypes.STRING,
     },
   },

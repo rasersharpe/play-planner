@@ -8,10 +8,18 @@ const router = express.Router();
 
 // POST /users/:id/played - Add a game to the Played Games list
 router.post('/:id/played', async (req: Request, res: Response): Promise<void> => {
+  if (!req.user) {
+    res.status(401).json({ message: 'User not authenticated' });  // Ensure user is authenticated
+    return;
+  }
   const { id } = req.params;
   const { gameId, name, background_image, description_raw } = req.body;
 
   try {
+    if (req.user.id !== Number(id)) {
+      res.status(401).json({ message: 'Unauthorized' });  // Check that userId matches
+      return;
+    }
     const user = await User.findByPk(id);
     if (!user) {
       res.status(404).json({ message: 'User not found' });
@@ -45,7 +53,7 @@ router.post('/:id/played', async (req: Request, res: Response): Promise<void> =>
 // POST /users/:id/wishlist - Add a game to the Wish List
 router.post('/:id/wishlist', async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
-  const { gameId, name, background_image, description_raw } = req.body;
+  const { gameId, name, background_image, description } = req.body;
 
   try {
     console.log("Authenticated User:", req.user);
@@ -59,7 +67,7 @@ router.post('/:id/wishlist', async (req: Request, res: Response): Promise<void> 
     const existingWishListGame = await WishList.findOne({
       where: { userId: user.id, gameId },
     });
-
+    console.log(existingWishListGame, user.id, gameId)
     if (existingWishListGame) {
       res.status(400).json({ message: 'Game already added to wish list' });
       return;
@@ -70,11 +78,12 @@ router.post('/:id/wishlist', async (req: Request, res: Response): Promise<void> 
       gameId,
       name,
       background_image,
-      description_raw,
+      description,
     });
 
     res.status(201).json(wishListGame);
   } catch (error) {
+    console.error("Error adding game to wish list:", error);
     res.status(500).json({ message: (error as Error).message });
   }
 });
@@ -101,7 +110,14 @@ router.get('/:id/played', async (req: Request, res: Response): Promise<void> => 
 
 // GET /users/:id/wishlist - Get all wish list games for a user
 router.get('/:id/wishlist', async (req: Request, res: Response): Promise<void> => {
+  console.log("User ID:", req.params.id, req.user);
   const { id } = req.params;
+  // Ensure the user is logged in and check their userId
+  if (!req.user || req.user.id !== Number(id)) {
+    res.status(401).json({ message: 'Please login to view your wishlist' });
+    return;
+  }
+
   try {
     const user = await User.findByPk(id);
     if (!user) {
@@ -112,11 +128,14 @@ router.get('/:id/wishlist', async (req: Request, res: Response): Promise<void> =
     const wishList = await WishList.findAll({
       where: { userId: id },
     });
-    console.log("Wish List:", wishList);
+
     res.json(wishList);
   } catch (error) {
+    console.error("Error fetching wish list games:", error);
     res.status(500).json({ message: (error as Error).message });
   }
 });
 
 export { router as userRouter };
+
+
