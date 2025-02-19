@@ -31,7 +31,7 @@ const router = createBrowserRouter([
         element: <WishList />,
       },
       {
-        path: "played",
+        path: "/played",
         element: <PlayedGames />,
       },
       {
