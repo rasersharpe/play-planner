@@ -25,9 +25,10 @@ const GameSearch: React.FC = () => {
         const firstGame = data.results[0];
         setGame({
           id: firstGame.id,
+          gameId: firstGame.id,
           name: firstGame.name,
           background_image: firstGame.background_image,
-          description_raw: firstGame.description_raw,
+          description: firstGame.description_raw,
         });
       } else {
         setGame(null);
@@ -59,7 +60,7 @@ const GameSearch: React.FC = () => {
             gameId: game.id,
             name: game.name,
             background_image: game.background_image,
-            description: game.description_raw,
+            description: game.description,
           }),
         });
 
@@ -94,7 +95,7 @@ const GameSearch: React.FC = () => {
             gameId: game.id,
             name: game.name,
             background_image: game.background_image,
-            description: game.description_raw,
+            description: game.description,
           }),
         });
 
@@ -139,7 +140,7 @@ const GameSearch: React.FC = () => {
               <h2>{game.name}</h2>
             </div>
             <div>
-              <p>{game.description_raw}</p>
+              <p>{game.description}</p>
             </div>
             <div className="figure__button__container">
               <button

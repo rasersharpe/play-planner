@@ -2,7 +2,14 @@ import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
 interface JwtPayload {
+  id: string;
   username: string;
+}
+
+declare module 'express-serve-static-core' {
+  interface Request {
+    user?: JwtPayload;
+  }
 }
 
 // Verify the token exists and add the user data to the request object

@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import { PlayedGame } from '../../models/played-game.js';
 import { WishList } from '../../models/wish-list.js';
 import { User } from '../../models/user.js';
+import { authenticateToken } from '../../middleware/auth.js';
 
 const router = express.Router();
 
@@ -98,5 +99,26 @@ router.get('/:id/wishlist', async (req: Request, res: Response): Promise<void> =
     res.status(500).json({ message: (error as Error).message });
   }
 });
+
+// GET /users/profile - Get the profile of the authenticated user
+router.get('/profile', authenticateToken, async (req: Request, res: Response): Promise<void> => {
+  try {
+    if (!req.user) {
+      res.status(401).json({ message: 'User not authenticated' });
+      return;
+    }
+
+    const user = await User.findByPk(req.user.id);
+    if (!user) {
+      res.status(404).json({ message: 'User not found' });
+      return;
+    }
+    res.json(user);
+  } catch (error) {
+    console.error("Error fetching user profile:", error); // debugging statement
+    res.status(500).json({ message: (error as Error).message });
+  }
+});
+
 
 export { router as userRouter };
