@@ -9,7 +9,7 @@ const router = express.Router();
 // POST /users/:id/played - Add a game to the Played Games list
 router.post('/:id/played', async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
-  const { gameId, name, background_image, description } = req.body;
+  const { gameId, name, background_image, description_raw } = req.body;
 
   try {
     const user = await User.findByPk(id);
@@ -18,12 +18,22 @@ router.post('/:id/played', async (req: Request, res: Response): Promise<void> =>
       return;
     }
 
+    // Check if the game already exists for the user
+    const existingPlayedGame = await PlayedGame.findOne({
+      where: { userId: user.id, gameId },
+    });
+
+    if (existingPlayedGame) {
+      res.status(400).json({ message: 'Game already added to played games' });
+      return;
+    }
+
     const playedGame = await PlayedGame.create({
       userId: user.id,
       gameId,
       name,
       background_image,
-      description,
+      description_raw,
     });
 
     res.status(201).json(playedGame);
@@ -35,7 +45,7 @@ router.post('/:id/played', async (req: Request, res: Response): Promise<void> =>
 // POST /users/:id/wishlist - Add a game to the Wish List
 router.post('/:id/wishlist', async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
-  const { gameId, name, background_image, description } = req.body;
+  const { gameId, name, background_image, description_raw } = req.body;
 
   try {
     console.log("Authenticated User:", req.user);
@@ -45,12 +55,22 @@ router.post('/:id/wishlist', async (req: Request, res: Response): Promise<void> 
       return; // Ensure the response is returned to stop further execution
     }
 
+    // Check if the game already exists in the wish list for the user
+    const existingWishListGame = await WishList.findOne({
+      where: { userId: user.id, gameId },
+    });
+
+    if (existingWishListGame) {
+      res.status(400).json({ message: 'Game already added to wish list' });
+      return;
+    }
+
     const wishListGame = await WishList.create({
       userId: user.id,
       gameId,
       name,
       background_image,
-      description,
+      description_raw,
     });
 
     res.status(201).json(wishListGame);

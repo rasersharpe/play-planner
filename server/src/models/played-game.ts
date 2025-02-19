@@ -21,7 +21,7 @@ PlayedGame.init(
     background_image: {
       type: DataTypes.STRING,
     },
-    description: {
+    description_raw: {
       type: DataTypes.STRING,
     },
   },
@@ -29,6 +29,12 @@ PlayedGame.init(
     sequelize,
     modelName: 'PlayedGame',
     tableName: 'played_game',
+    indexes: [
+      {
+        unique: true,
+        fields: ['userId', 'gameId'],  // Ensure that the user can't add the same game multiple times
+      },
+    ],
   }
 );
 
