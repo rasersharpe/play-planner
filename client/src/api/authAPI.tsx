@@ -28,6 +28,7 @@ const login = async (userInfo: UserLogin) => {
   }
 };
 
+// Function that handles the signup process
 const signup = async (userInfo: UserSignup) => {
   try {
     const response = await fetch("/auth/signup", {
