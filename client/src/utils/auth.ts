@@ -32,9 +32,15 @@ class AuthService {
     return loggedUser;
   }
 
+  // Retrieve the userId from localStorage
+  getUserId() {
+    return localStorage.getItem("userId");
+  }
+
   // Method to log in the user
-  login(idToken: string) {
+  login(idToken: string, userId: string) {
     localStorage.setItem("id_token", idToken);
+    localStorage.setItem("userId", userId);
     window.location.assign("/");
   }
 

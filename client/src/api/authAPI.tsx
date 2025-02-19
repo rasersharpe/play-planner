@@ -18,7 +18,10 @@ const login = async (userInfo: UserLogin) => {
       throw new Error("User information not retrieved, check network tab!");
     }
 
-    return data;
+    return {
+      token: data.token,
+      userId: data.userId,
+    };
   } catch (error) {
     console.log("User information not retrieved, check network tab!", error);
     return Promise.reject("Could not retrieve user information");

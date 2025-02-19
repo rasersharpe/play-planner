@@ -5,23 +5,40 @@ import AuthService from "../utils/auth";
 const PlayedGames = () => {
   const [games, setGames] = useState<GameInterface[]>([]);
   const userId = AuthService.loggedIn() ? AuthService.getProfile()?.id : null;
+  
+  if (!userId) {
+    return <p>Please log in to see your played games.</p>;
+  }
+
+  console.log("User Profile:", AuthService.loggedIn());
+  console.log("User ID:", userId);
 
   useEffect(() => {
     // Fetch the played games from the API
     const fetchPlayedGames = async () => {
       if (userId) {
-        const response = await fetch(`/api/users/${userId}/played`);
+        const token = AuthService.getToken();
+        const response = await fetch(`/api/users/${userId}/played`, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
         if (response.ok) {
           const data = await response.json();
+          console.log("Fetched Played Games:", data);  // Check the data returned
           setGames(data);
         } else {
           console.error("Error fetching played games");
         }
       }
     };
+    
+    
+    
 
     fetchPlayedGames();
   }, [userId]);
+  console.log("Games state:", games);
 
   return (
     <div className="games-list">

@@ -32,7 +32,7 @@ const Login = () => {
     setLoginError(null);
     try {
       const data = await login(loginData);
-      Auth.login(data.token);
+      Auth.login(data.token, data.userId);
       navigate("/");
     } catch (error) {
       console.error("Login failed", error);

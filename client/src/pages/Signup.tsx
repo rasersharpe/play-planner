@@ -1,7 +1,4 @@
 import { useState, type FormEvent, type ChangeEvent } from "react";
-
-import Auth from "../utils/auth";
-import { signup } from "../api/authAPI";
 import type { UserSignup } from "../interfaces/UserSignup";
 
 const Signup = () => {
@@ -25,15 +22,44 @@ const Signup = () => {
   // This function handles the form submission
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+  
+    const userData = {
+      username: signupData.username,
+      email: signupData.email,
+      password: signupData.password,
+    };
+  
     try {
-      const data = await signup(signupData);
-      if (data && data.token) {
-        Auth.login(data.token);
-      } else {
-        throw new Error("Invalid signup response");
+      const response = await fetch('http://localhost:3000/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(userData),
+      });
+  
+      // Log the raw response to check its content
+      const responseBody = await response.json();
+      console.log("Response Body:", responseBody);  // This is important for debugging
+  
+      // Check if the response is successful
+      if (!response.ok) {
+        // Log error data if the response is not ok
+        console.log("Error response:", responseBody);
+        throw new Error(responseBody.message || 'Error during signup');
       }
+  
+      // If response is OK, process the data
+      console.log('Signup successful', responseBody);
+  
+      // Handle successful signup (e.g., redirect or show message)
     } catch (error) {
-      console.error("Signup failed", error);
+      console.error('Signup failed', error);
+      if (error instanceof Error) {
+        setSignupError('Signup failed: ' + error.message); // Show error message to the user
+      } else {
+        setSignupError('Signup failed: An unknown error occurred'); // Handle unknown error type
+      }
     }
   };
 
@@ -85,3 +111,7 @@ const Signup = () => {
 };
 
 export default Signup;
+function setSignupError(_arg0: string) {
+  throw new Error("Function not implemented.");
+}
+
