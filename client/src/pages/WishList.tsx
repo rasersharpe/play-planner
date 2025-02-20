@@ -5,7 +5,7 @@ import AuthService from "../utils/auth";
 const WishList = () => {
   const [games, setGames] = useState<GameInterface[]>([]);
  const userId = AuthService.loggedIn() ? AuthService.getProfile()?.id : null;
-  console.log("User Profile:", AuthService.loggedIn());
+  //console.log("User Profile:", AuthService.loggedIn());
   console.log("User ID:", userId);
   console.log("User Profile Data:", AuthService.getProfile());
 
