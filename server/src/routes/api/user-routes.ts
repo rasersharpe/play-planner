@@ -13,7 +13,7 @@ router.post('/:id/played', async (req: Request, res: Response): Promise<void> =>
     return;
   }
   const { id } = req.params;
-  const { gameId, name, background_image, description } = req.body;
+  const { gameId, name, background_image } = req.body;
 
   try {
     if (req.user.id !== Number(id)) {
@@ -41,7 +41,6 @@ router.post('/:id/played', async (req: Request, res: Response): Promise<void> =>
       gameId,
       name,
       background_image,
-      description,
     });
 
     res.status(201).json(playedGame);
@@ -53,7 +52,7 @@ router.post('/:id/played', async (req: Request, res: Response): Promise<void> =>
 // POST /users/:id/wishlist - Add a game to the Wish List
 router.post('/:id/wishlist', async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
-  const { gameId, name, background_image, description } = req.body;
+  const { gameId, name, background_image } = req.body;
 
   try {
     console.log("Authenticated User:", req.user);
@@ -78,7 +77,6 @@ router.post('/:id/wishlist', async (req: Request, res: Response): Promise<void> 
       gameId,
       name,
       background_image,
-      description,
     });
 
     res.status(201).json(wishListGame);
