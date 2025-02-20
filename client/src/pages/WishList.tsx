@@ -36,11 +36,15 @@ const WishList = () => {
       {games.length === 0 ? (
         <p>Your wishlist is empty.</p>
       ) : (
-        <ul>
+        <ul className="search__game__container">
           {games.map((game) => (
             <li key={game.id} className="game-item">
+              <img
+                className="game__image"
+                src={game.background_image}
+                alt={game.name}
+              />
               <h2>{game.name}</h2>
-              <img src={game.background_image} alt={game.name} />
               <p>{game.description_raw}</p>
             </li>
           ))}

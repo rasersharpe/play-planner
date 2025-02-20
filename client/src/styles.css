@@ -393,4 +393,19 @@ footer div p {
   .search__section {
     width: 100vw;
   }
+
+  header {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .logo__nav__container {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  footer {
+    align-items: center;
+    flex-direction: column;
+  }
 }
