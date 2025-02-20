@@ -61,7 +61,6 @@ const GameSearch: React.FC = () => {
             gameId: game.id,
             name: game.name,
             background_image: game.background_image,
-            description: game.description,
           }),
         });
 
@@ -96,7 +95,6 @@ const GameSearch: React.FC = () => {
             gameId: game.id,
             name: game.name,
             background_image: game.background_image,
-            description: game.description,
           }),
         });
 
