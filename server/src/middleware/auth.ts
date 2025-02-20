@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 
 interface JwtPayload {
   username: string;
+  id: number;
 }
 
 // Verify the token exists and add the user data to the request object

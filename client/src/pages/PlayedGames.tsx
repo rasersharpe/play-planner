@@ -14,29 +14,24 @@ const PlayedGames = () => {
 
 
   useEffect(() => {
-    // Fetch the played games from the API
-    const fetchPlayedGames = async () => {
+    // Fetch the wishlist games from the API
+    const fetchWishList = async () => {
       if (userId) {
-        const token = AuthService.getToken();
         const response = await fetch(`/api/users/${userId}/played`, {
           headers: {
-            'Authorization': `Bearer ${token}`,
+            Authorization: `Bearer ${AuthService.getToken()}`,
           },
-        });
+          });
         if (response.ok) {
           const data = await response.json();
-          console.log("Fetched Played Games:", data);  // Check the data returned
           setGames(data);
         } else {
-          console.error("Error fetching played games");
+          console.error("Error fetching wishlist games");
         }
       }
     };
-    
-    
-    
 
-    fetchPlayedGames();
+    fetchWishList();
   }, [userId]);
   console.log("Games state:", games);
 
@@ -51,7 +46,7 @@ const PlayedGames = () => {
             <li key={game.id} className="game-item">
               <h2>{game.name}</h2>
               <img src={game.background_image} alt={game.name} />
-              <p>{game.description_raw}</p>
+              <p>{game.description}</p>
             </li>
           ))}
         </ul>
