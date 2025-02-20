@@ -3,11 +3,13 @@ import { Request, Response } from 'express';
 import { PlayedGame } from '../../models/played-game.js';
 import { WishList } from '../../models/wish-list.js';
 import { User } from '../../models/user.js';
+import { authenticateToken } from '../../middleware/auth.js';
 
 const router = express.Router();
 
 // POST /users/:id/played - Add a game to the Played Games list
-router.post('/:id/played', async (req: Request, res: Response): Promise<void> => {
+router.post('/:id/played', authenticateToken, async (req: Request, res: Response): Promise<void> => {
+  console.log('Received User:', req.user); 
   if (!req.user) {
     res.status(401).json({ message: 'User not authenticated' });  // Ensure user is authenticated
     return;
@@ -16,10 +18,6 @@ router.post('/:id/played', async (req: Request, res: Response): Promise<void> =>
   const { gameId, name, background_image } = req.body;
 
   try {
-    if (req.user.id !== Number(id)) {
-      res.status(401).json({ message: 'Unauthorized' });  // Check that userId matches
-      return;
-    }
     const user = await User.findByPk(id);
     if (!user) {
       res.status(404).json({ message: 'User not found' });
@@ -30,6 +28,8 @@ router.post('/:id/played', async (req: Request, res: Response): Promise<void> =>
     const existingPlayedGame = await PlayedGame.findOne({
       where: { userId: user.id, gameId },
     });
+
+    console.log(existingPlayedGame, user.id, gameId)
 
     if (existingPlayedGame) {
       res.status(400).json({ message: 'Game already added to played games' });
@@ -50,7 +50,7 @@ router.post('/:id/played', async (req: Request, res: Response): Promise<void> =>
 });
 
 // POST /users/:id/wishlist - Add a game to the Wish List
-router.post('/:id/wishlist', async (req: Request, res: Response): Promise<void> => {
+router.post('/:id/wishlist', authenticateToken, async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
   const { gameId, name, background_image } = req.body;
 
