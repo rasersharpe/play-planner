@@ -7,7 +7,7 @@ const GameSearch: React.FC = () => {
   const [game, setGame] = useState<GameInterface | null>(null);
   const [gameTitle, setGameTitle] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [userId] = useState<number>(1);
+  const userId = AuthService.loggedIn() ? AuthService.getProfile()?.id : null;
 
   const handleSearch = () => {
     if (gameTitle) {
