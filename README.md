@@ -44,11 +44,11 @@ For full function of the application, users must first create an account by navi
 
 ## Acknowledgments
 
--[RAWG Video Games Database API](https://rawg.io/apidocs)
--Blake Anderson's [GitHub](https://github.com/Blakeroband)
--Jay Bhatt's [GitHub](https://github.com/rasersharpe)
--Jake Ringate's [GitHub](https://github.com/JAKES-CLOUD-SPACE)
--Kira Ziegler's [GitHub](https://github.com/kiralee97)
+- [RAWG Video Games Database API](https://rawg.io/apidocs)
+- Blake Anderson's [GitHub](https://github.com/Blakeroband)
+- Jay Bhatt's [GitHub](https://github.com/rasersharpe)
+- Jake Ringate's [GitHub](https://github.com/JAKES-CLOUD-SPACE)
+- Kira Ziegler's [GitHub](https://github.com/kiralee97)
 
 ## License
 
