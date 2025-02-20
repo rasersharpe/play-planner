@@ -4,7 +4,7 @@ import AuthService from "../utils/auth";
 
 const WishList = () => {
   const [games, setGames] = useState<GameInterface[]>([]);
-  const userId = AuthService.loggedIn() ? AuthService.getProfile()?.id : null;
+ const userId = AuthService.loggedIn() ? AuthService.getProfile()?.id : null;
   console.log("User Profile:", AuthService.loggedIn());
   console.log("User ID:", userId);
   console.log("User Profile Data:", AuthService.getProfile());
@@ -17,7 +17,11 @@ const WishList = () => {
     // Fetch the wishlist games from the API
     const fetchWishList = async () => {
       if (userId) {
-        const response = await fetch(`/api/users/${userId}/wishlist`);
+        const response = await fetch(`/api/users/${userId}/wishlist`, {
+          headers: {
+            Authorization: `Bearer ${AuthService.getToken()}`,
+          },
+          });
         if (response.ok) {
           const data = await response.json();
           setGames(data);
@@ -45,7 +49,8 @@ const WishList = () => {
                 alt={game.name}
               />
               <h2>{game.name}</h2>
-              <p>{game.description_raw}</p>
+              <img src={game.background_image} alt={game.name} />
+              <p>{game.description}</p>
             </li>
           ))}
         </ul>
