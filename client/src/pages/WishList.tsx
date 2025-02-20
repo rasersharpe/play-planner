@@ -8,7 +8,7 @@ const WishList = () => {
   console.log("User Profile:", AuthService.loggedIn());
   console.log("User ID:", userId);
   console.log("User Profile Data:", AuthService.getProfile());
-  
+
   if (!userId) {
     return <p>Please log in to see your Wishlist.</p>;
   }
@@ -36,13 +36,18 @@ const WishList = () => {
 
   return (
     <div className="games-list">
-      <h1>Wish List</h1>
+      <h2>Wish List</h2>
       {games.length === 0 ? (
         <p>Your wishlist is empty.</p>
       ) : (
-        <ul>
+        <ul className="search__game__container">
           {games.map((game) => (
             <li key={game.id} className="game-item">
+              <img
+                className="game__image"
+                src={game.background_image}
+                alt={game.name}
+              />
               <h2>{game.name}</h2>
               <img src={game.background_image} alt={game.name} />
               <p>{game.description}</p>

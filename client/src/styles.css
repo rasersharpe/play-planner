@@ -268,6 +268,16 @@ footer div p {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  list-style-type: none;
+}
+
+.games__list {
+  width: 60rem;
+  height: 50rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .game__image {
@@ -336,4 +346,66 @@ footer div p {
   background-color: var(--color-melon);
   color: var(--color-yinMn_blue);
   cursor: not-allowed;
+}
+
+@media screen and (max-width: 768px) {
+  .search__game__container {
+    width: 90vw;
+    height: auto;
+    border-radius: 1rem;
+  }
+  .game__image {
+    width: 90vw;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+  }
+  .figure__button__container {
+    width: 90vw;
+  }
+  .button__add__wishList {
+    width: 40vw;
+  }
+  .button__add__playedList {
+    width: 40vw;
+  }
+  .header__search__bar {
+    width: 80vw;
+  }
+  .form__container {
+    width: 80vw;
+    height: auto;
+    border-radius: 1rem;
+  }
+  .login__form {
+    width: 70vw;
+    height: auto;
+  }
+  .signup__form {
+    width: 70vw;
+    height: auto;
+  }
+  .form__input {
+    width: 60vw;
+  }
+  .form__submit__button {
+    width: 40vw;
+  }
+  .search__section {
+    width: 100vw;
+  }
+
+  header {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .logo__nav__container {
+    align-items: center;
+    flex-direction: column;
+  }
+
+  footer {
+    align-items: center;
+    flex-direction: column;
+  }
 }
