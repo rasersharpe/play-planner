@@ -20,11 +20,7 @@ PlayedGame.init(
     },
     background_image: {
       type: DataTypes.STRING,
-    },
-    description: {
-      type: DataTypes.STRING,
-      allowNull: true,
-    },
+    }
   },
   {
     sequelize,
