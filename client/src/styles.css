@@ -348,6 +348,17 @@ footer div p {
   cursor: not-allowed;
 }
 
+.games__list {
+  width: 60rem;
+  height: 50rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Media Queries */
+
 @media screen and (max-width: 768px) {
   .search__game__container {
     width: 90vw;
