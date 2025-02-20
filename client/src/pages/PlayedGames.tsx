@@ -14,8 +14,8 @@ const PlayedGames = () => {
 
 
   useEffect(() => {
-    // Fetch the wishlist games from the API
-    const fetchWishList = async () => {
+    // Fetch the played games from the API
+    const fetchPlayedGames = async () => {
       if (userId) {
         const response = await fetch(`/api/users/${userId}/played`, {
           headers: {
@@ -26,12 +26,12 @@ const PlayedGames = () => {
           const data = await response.json();
           setGames(data);
         } else {
-          console.error("Error fetching wishlist games");
+          console.error("Error fetching played games");
         }
       }
     };
 
-    fetchWishList();
+    fetchPlayedGames();
   }, [userId]);
   console.log("Games state:", games);
 

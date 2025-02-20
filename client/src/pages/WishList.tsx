@@ -33,7 +33,7 @@ const WishList = () => {
 
     fetchWishList();
   }, [userId]);
-
+  console.log("wishlist state:", games);
   return (
     <div className="games-list">
       <h1>Wish List</h1>
@@ -43,8 +43,8 @@ const WishList = () => {
         <ul>
           {games.map((game) => (
             <li key={game.id} className="game-item">
-              <h2>{game.name}</h2>
-              <img src={game.background_image} alt={game.name} />
+              <h2 className="game-name">{game.name}</h2>
+              <img src={game.background_image} alt={game.name} className="game-photo"/>
               <p>{game.description}</p>
             </li>
           ))}
