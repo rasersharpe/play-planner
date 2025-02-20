@@ -33,7 +33,7 @@ const WishList = () => {
 
     fetchWishList();
   }, [userId]);
-
+  console.log("wishlist state:", games);
   return (
     <div className="games-list">
       <h2>Wish List</h2>
